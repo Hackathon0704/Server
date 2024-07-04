@@ -14,8 +14,6 @@ public class UserRequestDTO {
         String account;
         @NotNull
         String password;
-        @NotNull
-        String passwordConfirm;
     }
 
     @Getter
