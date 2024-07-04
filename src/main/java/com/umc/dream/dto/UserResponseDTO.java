@@ -24,6 +24,7 @@ public class UserResponseDTO {
     @AllArgsConstructor
     public static class LoginResultDTO {
         Long userId;
+        String name;
     }
 
     @Builder
