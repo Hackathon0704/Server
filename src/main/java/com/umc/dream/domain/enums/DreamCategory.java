@@ -8,9 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @Slf4j
 public enum DreamCategory {
-    NORMAL("일반"),
-    SOSO("그냥그래요"),
-    GOOD("온수가 빨라요");
+    NORMAL("일상"),
+    NIGHTMARE("악몽"),
+    REPEATED_DREAM("반복되는 꿈"),
+    LUCID_DREAM("자각몽"),
+    PRECOGNITIVE_DREAM("예지몽");
 
     @JsonValue
     private final String value;
@@ -26,7 +28,7 @@ public enum DreamCategory {
                 return dreamCategory;
             }
         }
-        log.debug("HotWaterStatus.from() exception occur param: {}", param);
+        log.debug("dreamCategory.from() exception occur param: {}", param);
         return null;
     }
 }
