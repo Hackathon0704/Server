@@ -41,8 +41,7 @@ public class PostCommandServiceImpl implements PostCommandService {
 
     @Override
     public Comment createComment(Long postId, PostRequestDTO.CreateCommentDTO dto) {
-        Post findPost = postRepository.findById(postId)
-                .orElseThrow(() -> new TempHandler(ErrorStatus.POST_NOT_FOUND));
+        Post findPost = findPostByPostId(postId);
 
         User findUser = findUserByUserId(dto.getWriterId());
 
@@ -51,9 +50,21 @@ public class PostCommandServiceImpl implements PostCommandService {
         return commentRepository.save(newComment);
     }
 
+    @Override
+    public void deletePost(Long postId) {
+        Post findPost = findPostByPostId(postId);
+        postRepository.delete(findPost);
+    }
+
     private User findUserByUserId(Long userId) {
         User findUser = userRepository.findById(userId)
                 .orElseThrow(() -> new TempHandler(ErrorStatus.MEMBER_NOT_FOUND));
         return findUser;
+    }
+
+    private Post findPostByPostId(Long postId) {
+        Post findPost = postRepository.findById(postId)
+                .orElseThrow(() -> new TempHandler(ErrorStatus.POST_NOT_FOUND));
+        return findPost;
     }
 }

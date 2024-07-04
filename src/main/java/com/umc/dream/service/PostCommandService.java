@@ -7,4 +7,5 @@ import com.umc.dream.dto.PostRequestDTO;
 public interface PostCommandService {
     Post createCommunityPost(PostRequestDTO.CreateCommunityDTO request);
     Comment createComment(Long postId, PostRequestDTO.CreateCommentDTO request);
+    void deletePost(Long postId);
 }

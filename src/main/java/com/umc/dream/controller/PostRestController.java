@@ -56,5 +56,11 @@ public class PostRestController {
         return ApiResponse.onSuccess(PostConverter.toCreateCommentResponseDTO(newComment));
     }
 
+    @DeleteMapping("/{postId}")
+    @Operation(summary = "게시글 삭제 API", description = "게시글의 id를 받아 게시글을 삭제하는 API입니다.")
+    public ApiResponse deletePost(@PathVariable Long postId) {
+        postCommandService.deletePost(postId);
+        return ApiResponse.onSuccess("게시글 삭제 성공!");
+    }
 
 }
