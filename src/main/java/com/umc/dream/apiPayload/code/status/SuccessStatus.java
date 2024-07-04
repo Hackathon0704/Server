@@ -3,8 +3,8 @@ package com.umc.dream.apiPayload.code.status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import umc.spring.apiPayload.code.BaseCode;
-import umc.spring.apiPayload.code.ReasonDTO;
+import com.umc.dream.apiPayload.code.BaseCode;
+import com.umc.dream.apiPayload.code.ReasonDTO;
 
 @Getter
 @AllArgsConstructor
