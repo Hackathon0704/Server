@@ -1,5 +1,6 @@
 package com.umc.dream.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
+    @Hidden
     @GetMapping("/health")
     @Operation(summary = "health check API",description = "인스턴스의 health check하는 API입니다")
     public String healthCheck() {
