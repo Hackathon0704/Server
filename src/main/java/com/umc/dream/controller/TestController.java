@@ -1,4 +1,4 @@
-package com.umc.dream;
+package com.umc.dream.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.GetMapping;

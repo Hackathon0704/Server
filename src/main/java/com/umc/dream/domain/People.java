@@ -2,6 +2,7 @@ package com.umc.dream.domain;
 
 import com.umc.dream.domain.common.BaseEntity;
 import jakarta.persistence.*;
+
 import lombok.*;
 
 @Entity
