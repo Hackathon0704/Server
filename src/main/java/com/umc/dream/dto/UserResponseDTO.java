@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class UserResponseDTO {
 
@@ -33,5 +34,29 @@ public class UserResponseDTO {
     @AllArgsConstructor
     public static class CheckAccountResultDTO {
         boolean isDuplicated;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ProfessionInfoDTO {
+        String name;
+        String job;
+        String description;
+        String price;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ProfessionInfoListDTO {
+        List<UserResponseDTO.ProfessionInfoDTO> professionInfoDTOList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
     }
 }

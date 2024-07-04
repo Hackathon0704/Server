@@ -7,11 +7,11 @@ import com.umc.dream.dto.UserResponseDTO;
 import com.umc.dream.service.UserService.UserService;
 import com.umc.dream.converter.UserConverter;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,4 +40,15 @@ public class UserController {
         boolean isDuplicated = userService.CheckAccount(request);
         return ApiResponse.onSuccess(UserConverter.toCheckAccountResultDTO(isDuplicated));
     }
+
+    @Operation(summary = "전문가 정보 조회 API", description = "전문가의 정보를 조회합니다.")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0이 1 페이지 이며 페이지당 4개씩 조회합니다."),
+    })
+    @GetMapping("/professionList")
+    public ApiResponse<UserResponseDTO.ProfessionInfoListDTO> getProfessionList(@RequestParam(name = "page") Integer page) {
+        Page<User> professionList = userService.getProfessionList(page);
+        return ApiResponse.onSuccess(UserConverter.toProfessionInfoListDTO(professionList));
+    }
+
 }

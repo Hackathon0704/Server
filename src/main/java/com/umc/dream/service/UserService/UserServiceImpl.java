@@ -4,11 +4,15 @@ import com.umc.dream.apiPayload.code.status.ErrorStatus;
 import com.umc.dream.apiPayload.exception.GeneralException;
 import com.umc.dream.converter.UserConverter;
 import com.umc.dream.domain.User;
+import com.umc.dream.domain.enums.Role;
 import com.umc.dream.dto.UserRequestDTO;
 import com.umc.dream.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,4 +54,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public Page<User> getProfessionList(Integer page) {
+        Page<User> professionList = userRepository.findByRole(Role.PRO, PageRequest.of(page, 4));
+        return professionList;
+    }
 }
