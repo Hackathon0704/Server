@@ -1,10 +1,9 @@
 package com.umc.dream.converter;
 
 import com.umc.dream.domain.*;
-import com.umc.dream.dto.AddDreamResponseDto;
-import com.umc.dream.dto.DreamRequestDto;
-import com.umc.dream.dto.FollowResponseDto;
-import com.umc.dream.dto.GetDreamResponseDto;
+import com.umc.dream.dto.*;
+
+import java.util.List;
 
 public class DreamConverter {
     public static AddDreamResponseDto toAddDreamResponse(Dream dream) {
@@ -20,6 +19,21 @@ public class DreamConverter {
                 .place(place.getLocation())
                 .feeling(feeling.getFeel())
                 .hashtag(hashtag.getTag())
+                .build();
+    }
+    public static ViewDreamResponseDto toViewDreamResponse(Dream dream, List<String> feels, List<String> name, List<String> location, List<String> tag) {
+        return ViewDreamResponseDto.builder()
+                .dream_id(dream.getId())
+                .date(dream.getDate())
+                .sleepTime(dream.getSleepTime())
+                .wakeUpTime(dream.getWakeUpTime())
+                .title(dream.getTitle())
+                .content(dream.getContent())
+                .category(dream.getCategory())
+                .people(name)
+                .place(location)
+                .feeling(feels)
+                .hashtag(tag)
                 .build();
     }
 

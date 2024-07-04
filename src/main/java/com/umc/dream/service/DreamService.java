@@ -7,6 +7,7 @@ import com.umc.dream.domain.*;
 import com.umc.dream.dto.DreamRequestDto;
 import com.umc.dream.dto.FollowRequestDto;
 import com.umc.dream.dto.GetDreamResponseDto;
+import com.umc.dream.dto.ViewDreamResponseDto;
 import com.umc.dream.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,7 @@ public class DreamService {
         }
         peopleRepository.saveAll(peopleList);
 
-        List<Hashtag> hashtagList = new ArrayList<>();
+        List<Hashtag> hashtagList = new ArrayList<>();new ArrayList<>();
         for (String s : dreamRequestDto.getHashtag()) {
             Hashtag hashtag = HashtagConverter.toHashtag(s, dream);
             hashtagList.add(hashtag);
@@ -77,5 +78,33 @@ public class DreamService {
             getDreamResponseDtos.add(DreamConverter.toGetDreamResponse(d, people, place, feeling, hashtag));
         }
         return getDreamResponseDtos;
+    }
+    @Transactional
+    public ViewDreamResponseDto viewDream(Long user_id, Long dream_id) {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(() -> new GeneralException(ErrorStatus._BAD_REQUEST));
+        Dream dream = dreamRepository.findByIdAndUser(dream_id, user)
+                .orElseThrow(() -> new GeneralException(ErrorStatus._BAD_REQUEST));
+        List<Feeling> feelings = feelingRepository.findAllByDream(dream);
+        List<String> feels = new ArrayList<>();
+        for (Feeling feeling : feelings) {
+            feels.add(feeling.getFeel());
+        }
+        List<People> peopleList = peopleRepository.findAllByDream(dream);
+        List<String> name = new ArrayList<>();
+        for (People people : peopleList) {
+            name.add(people.getName());
+        }
+        List<Place> placeList = placeRepository.findAllByDream(dream);
+        List<String> location = new ArrayList<>();
+        for (Place place : placeList) {
+            location.add(place.getLocation());
+        }
+        List<Hashtag> hashtagList = hashtagRepository.findAllByDream(dream);
+        List<String> tag = new ArrayList<>();
+        for (Hashtag hashtag : hashtagList) {
+            tag.add(hashtag.getTag());
+        }
+        return DreamConverter.toViewDreamResponse(dream, feels, name, location, tag);
     }
 }
