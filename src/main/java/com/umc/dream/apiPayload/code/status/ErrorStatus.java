@@ -43,7 +43,11 @@ public enum ErrorStatus implements BaseErrorCode {
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
 
     // DREAM
-    DREAM_NOT_FOUND(HttpStatus.NOT_FOUND, "DREAM4001", "해당 꿈 기록을 찾을 수 없습니다.")
+    DREAM_NOT_FOUND(HttpStatus.NOT_FOUND, "DREAM4001", "해당 꿈 기록을 찾을 수 없습니다."),
+
+    // DREAM
+    POST_NOT_FOUND(HttpStatus.NOT_FOUND, "POST4001", "해당 게시글을 찾을 수 없습니다.")
+
     ;
 
 

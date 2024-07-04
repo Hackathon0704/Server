@@ -6,4 +6,5 @@ import org.springframework.data.domain.Page;
 
 public interface PostQueryService {
     Page<Post> getCommunityPostList(Integer page);
+    Post getPostDetail(Long postId);
 }

@@ -24,4 +24,12 @@ public class PostQueryServiceImpl implements PostQueryService{
         Page<Post> allCommunityPost = postRepository.findAllByTypeJoinFetch(Type.COMMUNITY, PageRequest.of(page, 10));
         return allCommunityPost;
     }
+
+    @Override
+    public Post getPostDetail(Long postId) {
+        Post findPost = postRepository.findById(postId)
+                .orElseThrow(() -> new TempHandler(ErrorStatus.POST_NOT_FOUND));
+
+        return findPost;
+    }
 }

@@ -12,5 +12,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p join fetch p.writer where p.type = :type")
     Page<Post> findAllByTypeJoinFetch(Type type, PageRequest pageRequest);
 
-
 }

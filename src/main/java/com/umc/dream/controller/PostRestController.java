@@ -36,9 +36,16 @@ public class PostRestController {
     @Parameters({
             @Parameter(name = "page", description = "페이지 번호, 0이 1 페이지 입니다."),
     })
-    public ApiResponse<PostResponseDTO.CommunityPostListDTO> getCommunityPostList(@RequestParam(name = "page") Integer page) {
+    public ApiResponse<PostResponseDTO.PostPreviewListDTO> getCommunityPostList(@RequestParam(name = "page") Integer page) {
         Page<Post> communityPostList = postQueryService.getCommunityPostList(page);
-        return ApiResponse.onSuccess(PostConverter.toCommunityPostListDTO(communityPostList));
+        return ApiResponse.onSuccess(PostConverter.toPostPreviewListDTO(communityPostList));
+    }
+
+    @GetMapping("/{postId}")
+    @Operation(summary = "특정 게시글 상세 조회 API", description = "postId를 받아 게시글의 세부 내용과 댓글을 조회합니다.")
+    public ApiResponse<PostResponseDTO.PostDetailDTO> getPostDetail(@PathVariable Long postId) {
+        Post postDetail = postQueryService.getPostDetail(postId);
+        return ApiResponse.onSuccess(PostConverter.toPostDetailDTO(postDetail));
     }
 
 }

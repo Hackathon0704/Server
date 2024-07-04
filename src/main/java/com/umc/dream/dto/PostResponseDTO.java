@@ -24,8 +24,8 @@ public class PostResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class CommunityPostListDTO {
-        List<CommunityPostDTO> communityPostDTOList;
+    public static class PostPreviewListDTO {
+        List<PostPreviewDTO> communityPostDTOList;
         Integer listSize;
         Integer totalPage;
         Long totalElements;
@@ -37,10 +37,34 @@ public class PostResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class CommunityPostDTO {
+    public static class PostPreviewDTO {
         Long postId;
         String writer;
         String title;
+        String content;
         LocalDate createdAt;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PostDetailDTO {
+        Long postId;
+        String writer;
+        String title;
+        String content;
+        LocalDate createdAt;
+        List<CommentDetailDTO> commentDetailDTOList;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CommentDetailDTO {
+        private Long commentId;
+        private String writer;
+        private String content;
     }
 }
