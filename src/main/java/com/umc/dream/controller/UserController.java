@@ -33,4 +33,11 @@ public class UserController {
         User user = userService.login(request);
         return ApiResponse.onSuccess(UserConverter.toLoginResultDTO(user));
     }
+
+    @Operation(summary = "아이디 중복확인 API", description = "중복이면 true, 중복이 아니면 false를 반환합니다.")
+    @PostMapping("/check-account")
+    public ApiResponse<UserResponseDTO.CheckAccountResultDTO> checkAccount(@RequestBody UserRequestDTO.CheckAccountRequestDto request){
+        boolean isDuplicated = userService.CheckAccount(request);
+        return ApiResponse.onSuccess(UserConverter.toCheckAccountResultDTO(isDuplicated));
+    }
 }

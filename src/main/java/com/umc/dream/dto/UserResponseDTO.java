@@ -25,4 +25,12 @@ public class UserResponseDTO {
     public static class LoginResultDTO {
         Long userId;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CheckAccountResultDTO {
+        boolean isDuplicated;
+    }
 }
