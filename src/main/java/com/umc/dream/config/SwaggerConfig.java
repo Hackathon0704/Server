@@ -2,6 +2,7 @@ package com.umc.dream.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
@@ -18,6 +19,11 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
     @Bean
     public OpenAPI openAPI() {
+        Info info = new Info()
+                .title("6th UMC HACKATHON seoul API")
+                .description("5조 Server API 명세서")
+                .version("1.0.0");
+
         String jwtSchemeName = "JWT TOKEN";
         SecurityRequirement securityRequirement = new SecurityRequirement().addList(jwtSchemeName);
         Components components = new Components()
@@ -29,9 +35,9 @@ public class SwaggerConfig implements WebMvcConfigurer {
 
         // Swagger UI 접속 후, 딱 한 번만 accessToken을 입력해주면 모든 API에 토큰 인증 작업이 적용됩니다.
         return new OpenAPI()
+                .info(info)
                 .servers(Arrays.asList(
                         new Server().url("http://3.36.57.123:8080").description("Develop server"),
-                        new Server().url("https://dev.seungyeon.shop").description("Develop server"),
                         new Server().url("http://localhost:8080").description("Local server")))
                 .addSecurityItem(securityRequirement)
                 .components(components);
