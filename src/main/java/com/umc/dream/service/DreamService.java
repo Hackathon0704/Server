@@ -6,6 +6,7 @@ import com.umc.dream.converter.*;
 import com.umc.dream.domain.*;
 import com.umc.dream.dto.DreamRequestDto;
 import com.umc.dream.dto.FollowRequestDto;
+import com.umc.dream.dto.GetDreamResponseDto;
 import com.umc.dream.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -60,5 +61,21 @@ public class DreamService {
         placeRepository.saveAll(placeList);
 
         return dream;
+    }
+
+    @Transactional
+    public List<GetDreamResponseDto> getDream(Long user_id) {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(() -> new GeneralException(ErrorStatus._BAD_REQUEST));
+        List<Dream> dreams = dreamRepository.findAllByUser(user);
+        List<GetDreamResponseDto> getDreamResponseDtos = new ArrayList<>();
+        for (Dream d : dreams) {
+            People people = peopleRepository.findFirstByDream(d);
+            Place place = placeRepository.findFirstByDream(d);
+            Feeling feeling = feelingRepository.findFirstByDream(d);
+            Hashtag hashtag = hashtagRepository.findFirstByDream(d);
+            getDreamResponseDtos.add(DreamConverter.toGetDreamResponse(d, people, place, feeling, hashtag));
+        }
+        return getDreamResponseDtos;
     }
 }

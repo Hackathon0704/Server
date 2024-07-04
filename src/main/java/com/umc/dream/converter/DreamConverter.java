@@ -1,16 +1,25 @@
 package com.umc.dream.converter;
 
-import com.umc.dream.domain.Dream;
-import com.umc.dream.domain.Follow;
-import com.umc.dream.domain.User;
+import com.umc.dream.domain.*;
 import com.umc.dream.dto.AddDreamResponseDto;
 import com.umc.dream.dto.DreamRequestDto;
 import com.umc.dream.dto.FollowResponseDto;
+import com.umc.dream.dto.GetDreamResponseDto;
 
 public class DreamConverter {
     public static AddDreamResponseDto toAddDreamResponse(Dream dream) {
         return AddDreamResponseDto.builder()
                 .dream_id(dream.getId())
+                .build();
+    }
+    public static GetDreamResponseDto toGetDreamResponse(Dream dream, People people, Place place, Feeling feeling, Hashtag hashtag) {
+        return GetDreamResponseDto.builder()
+                .title(dream.getTitle())
+                .date(dream.getDate())
+                .people(people.getName())
+                .place(place.getLocation())
+                .feeling(feeling.getFeel())
+                .hashtag(hashtag.getTag())
                 .build();
     }
 

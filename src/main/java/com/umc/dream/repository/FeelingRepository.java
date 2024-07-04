@@ -5,4 +5,5 @@ import com.umc.dream.domain.Feeling;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FeelingRepository extends JpaRepository<Feeling, Long> {
+    Feeling findFirstByDream(Dream dream);
 }
