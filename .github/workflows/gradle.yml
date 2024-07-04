@@ -41,16 +41,16 @@ jobs:
         run: ./gradlew build -x test
         shell: bash
       
-      ## create application-prod.yml
-      - name: create application-prod.yml
-        if: contains(github.ref, 'main')
-        run: |
-          cd ./src/main
-          mkdir -p resources
-          cd ./resources
-          touch ./application.properties
-          echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.yml
-        shell: bash
+#      ## create application-prod.yml
+#      - name: create application-prod.yml
+#        if: contains(github.ref, 'main')
+#        run: |
+#          cd ./src/main
+#          mkdir -p resources
+#          cd ./resources
+#          touch ./application.properties
+#          echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.yml
+#        shell: bash
       
       - name: Build With Gradle
         if: contains(github.ref, 'main')
