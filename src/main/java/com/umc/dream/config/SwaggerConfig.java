@@ -30,7 +30,9 @@ public class SwaggerConfig implements WebMvcConfigurer {
         // Swagger UI 접속 후, 딱 한 번만 accessToken을 입력해주면 모든 API에 토큰 인증 작업이 적용됩니다.
         return new OpenAPI()
                 .servers(Arrays.asList(
-                        new Server().url("https://dev.seungyeon.shop").description("Develop server"), new Server().url("http://localhost:8080").description("Local server")))
+                        new Server().url("http://3.36.57.123:8080").description("Develop server"),
+                        new Server().url("https://dev.seungyeon.shop").description("Develop server"),
+                        new Server().url("http://localhost:8080").description("Local server")))
                 .addSecurityItem(securityRequirement)
                 .components(components);
     }

@@ -2,6 +2,7 @@ package com.umc.dream.domain;
 
 import com.umc.dream.domain.common.BaseEntity;
 import com.umc.dream.domain.enums.Role;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 10)
@@ -24,6 +26,12 @@ public class User extends BaseEntity {
 
     @Column(nullable = false, length = 20)
     private String password;
+    
+    @Nullable
+    private String description;
+
+    @Nullable
+    private String price;
 
     @Enumerated(EnumType.STRING)
     private Role role;
