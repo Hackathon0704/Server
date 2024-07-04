@@ -1,13 +1,17 @@
 package com.umc.dream.domain;
 
+import com.umc.dream.domain.common.BaseEntity;
 import com.umc.dream.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User {
+public class User extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +27,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<Dream> dreamList = new ArrayList<>();
 
     @Builder
     public User(String name, String account, String password, Role role) {
