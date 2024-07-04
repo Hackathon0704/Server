@@ -9,8 +9,11 @@ import com.umc.dream.dto.PostResponseDTO;
 import com.umc.dream.service.PostCommandService;
 import com.umc.dream.service.PostQueryService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,9 +32,13 @@ public class PostRestController {
     }
 
     @GetMapping("/community")
-    @Operation(summary = "커뮤니티 게시글 전체 조회 API",description = "")
-    public ApiResponse getCommunityPostList(@RequestParam(name = "page") Integer page) {
-        return null;
+    @Operation(summary = "커뮤니티 게시글 전체 조회 API", description = "query string으로 page를 받고, 한 페이지당 게시물 10개 입니다. 페이지는 0부터 입력해주세요.")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0이 1 페이지 입니다."),
+    })
+    public ApiResponse<PostResponseDTO.CommunityPostListDTO> getCommunityPostList(@RequestParam(name = "page") Integer page) {
+        Page<Post> communityPostList = postQueryService.getCommunityPostList(page);
+        return ApiResponse.onSuccess(PostConverter.toCommunityPostListDTO(communityPostList));
     }
 
 }
