@@ -15,6 +15,11 @@ public class UserConverter {
                 .build();
     }
 
+    public static UserResponseDTO.LoginResultDTO toLoginResultDTO(User user) {
+        return UserResponseDTO.LoginResultDTO.builder()
+                .userId(user.getId())
+                .build();
+    }
 
     public static User toUser(UserRequestDTO.JoinDto joinDto) {
         return User.builder()
@@ -24,4 +29,5 @@ public class UserConverter {
                 .role(Role.NORMAL)
                 .build();
     }
+
 }
