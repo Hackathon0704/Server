@@ -7,6 +7,9 @@ import com.umc.dream.domain.Dream;
 import com.umc.dream.domain.Follow;
 import com.umc.dream.dto.*;
 import com.umc.dream.service.DreamService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +22,10 @@ public class DreamController {
     private DreamService dreamService;
 
     @PostMapping("/diary")
+    @Operation(summary = "꿈 일기 생성 API", description = "꿈 일기 생성 API입니다")
+    @Parameters({
+            @Parameter(name = "dreamRequestDto", description = "상세 필드는 노션 API 명세를 참고!"),
+    })
     public ApiResponse<AddDreamResponseDto> createDream(@RequestBody DreamRequestDto dreamRequestDto) {
         Dream dream = dreamService.createDream(dreamRequestDto);
         AddDreamResponseDto addDreamResponseDto = DreamConverter.toAddDreamResponse(dream);
@@ -26,6 +33,10 @@ public class DreamController {
     }
 
     @GetMapping("/diary/{user_id}")
+    @Operation(summary = "내 꿈 일기 목록 API", description = "내 꿈 일기 목록 조회 API입니다")
+    @Parameters({
+            @Parameter(name = "user_id", description = "꿈 일기 목록을 조회하고자하는 사용자의 pk"),
+    })
     private ApiResponse<List<GetDreamResponseDto>> GetDream(@RequestParam Long user_id) {
         List<GetDreamResponseDto> getDreamResponseDtos = dreamService.getDream(user_id);
         return ApiResponse.onSuccess(getDreamResponseDtos);
