@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -37,6 +39,21 @@ public class Dream extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private DreamCategory category;
+
+    @OneToMany(mappedBy = "dream", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<People> characters = new ArrayList<>();
+
+    @OneToMany(mappedBy = "dream", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Place> places = new ArrayList<>();
+
+    @OneToMany(mappedBy = "dream", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Feeling> feelings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "dream", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Hashtag> hashtags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "dream", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
 
     @Builder
     public Dream(User user, LocalDate date, LocalDateTime sleepTime, LocalDateTime wakeUpTime, String title, String content, DreamCategory category) {
