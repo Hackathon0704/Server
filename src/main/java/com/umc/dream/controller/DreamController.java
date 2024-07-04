@@ -30,4 +30,10 @@ public class DreamController {
         List<GetDreamResponseDto> getDreamResponseDtos = dreamService.getDream(user_id);
         return ApiResponse.onSuccess(getDreamResponseDtos);
     }
+
+    @GetMapping("/diary/{user_id}/{diary_id}")
+    private ApiResponse<ViewDreamResponseDto> ViewDream(@RequestParam Long user_id, @RequestParam Long dream_id) {
+        ViewDreamResponseDto viewDreamResponseDto = dreamService.viewDream(user_id, dream_id);
+        return ApiResponse.onSuccess(viewDreamResponseDto);
+    }
 }
