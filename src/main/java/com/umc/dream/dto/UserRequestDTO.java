@@ -18,4 +18,11 @@ public class UserRequestDTO {
         String passwordConfirm;
     }
 
+    @Getter
+    public static class LoginDto {
+        @NotNull
+        String account;
+        @NotNull
+        String password;
+    }
 }

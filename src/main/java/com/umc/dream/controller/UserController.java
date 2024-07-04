@@ -26,4 +26,11 @@ public class UserController {
         User user = userService.join(request);
         return ApiResponse.onSuccess(UserConverter.toJoinResultDTO(user));
     }
+
+    @Operation(summary = "로그인 API")
+    @PostMapping("/login")
+    public ApiResponse<UserResponseDTO.LoginResultDTO> login(@RequestBody UserRequestDTO.LoginDto request){
+        User user = userService.login(request);
+        return ApiResponse.onSuccess(UserConverter.toLoginResultDTO(user));
+    }
 }
