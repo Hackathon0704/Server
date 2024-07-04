@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ProResponseDTO {
 
@@ -20,6 +21,14 @@ public class ProResponseDTO {
         String content;
         String proName; // 전문가 이름
         LocalDateTime createdAt;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ProPostListDTO {
+        private List<CreateResultDTO> posts;
     }
 
 }

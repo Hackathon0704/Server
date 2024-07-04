@@ -8,10 +8,10 @@ import com.umc.dream.dto.ProResponseDTO;
 import com.umc.dream.service.ProService.ProService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,4 +26,12 @@ public class ProController {
         Post post = proService.createProPost(request);
         return ApiResponse.onSuccess(ProPostConverter.toProPostResultDTO(post));
     }
+
+    @Operation(summary = "전문가 전체 게시글 조회 API")
+    @GetMapping
+    public ApiResponse<ProResponseDTO.ProPostListDTO> getAllProPostList(@RequestParam(name = "userId") Long userId) {
+        List<Post> posts = proService.getAllProPostList(userId);
+        return ApiResponse.onSuccess(ProPostConverter.toProPostListDTO(posts));
+    }
+
 }

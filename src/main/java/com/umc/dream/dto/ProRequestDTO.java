@@ -11,4 +11,9 @@ public class ProRequestDTO {
         String title;
         String content;
     }
+
+    @Getter
+    public static class GetAllProPostRequestDTO {
+        Long userId;
+    }
 }
