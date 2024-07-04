@@ -107,4 +107,17 @@ public class DreamService {
         }
         return DreamConverter.toViewDreamResponse(dream, feels, name, location, tag);
     }
+
+    @Transactional
+    public void deleteDream(Long user_id, Long dream_id) {
+        Dream dream = dreamRepository.findById(dream_id)
+                .orElseThrow(() -> new GeneralException(ErrorStatus._BAD_REQUEST));
+
+        // 작성자가 아닌 경우
+        if (!dream.getUser().getId().equals(user_id)) {
+            throw new GeneralException(ErrorStatus._FORBIDDEN);
+        }
+        
+        dreamRepository.delete(dream);
+    }
 }
