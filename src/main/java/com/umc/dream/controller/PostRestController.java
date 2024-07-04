@@ -3,6 +3,7 @@ package com.umc.dream.controller;
 
 import com.umc.dream.apiPayload.ApiResponse;
 import com.umc.dream.converter.PostConverter;
+import com.umc.dream.domain.Comment;
 import com.umc.dream.domain.Post;
 import com.umc.dream.dto.PostRequestDTO;
 import com.umc.dream.dto.PostResponseDTO;
@@ -26,7 +27,7 @@ public class PostRestController {
 
     @PostMapping("/community")
     @Operation(summary = "커뮤니티 게시글 등록 API",description = "친구, 전문가와 공유하는 게시글이 아닌 커뮤니티에 전체 공유되는 게시글을 저장하는 API 입니다")
-    public ApiResponse<PostResponseDTO.CreateCommunityPostResultDTO> createCommunityPost(@RequestBody @Valid PostRequestDTO.CreateCommunityDTO request) {
+    public ApiResponse<PostResponseDTO.CreateCommunityPostDTO> createCommunityPost(@RequestBody @Valid PostRequestDTO.CreateCommunityDTO request) {
         Post savedCommunityPost = postCommandService.createCommunityPost(request);
         return ApiResponse.onSuccess(PostConverter.toCreateCommunityPostResultDTO(savedCommunityPost));
     }
@@ -47,5 +48,13 @@ public class PostRestController {
         Post postDetail = postQueryService.getPostDetail(postId);
         return ApiResponse.onSuccess(PostConverter.toPostDetailDTO(postDetail));
     }
+
+    @PostMapping("/{postId}/comments")
+    @Operation(summary = "게시글 댓글 작성 API", description = "게시글의 id, 작성자의 id, 댓글 내용을 받아 댓글을 생성하는 API입니다.")
+    public ApiResponse<PostResponseDTO.CreateCommentDTO> createComment(@PathVariable Long postId, @RequestBody @Valid PostRequestDTO.CreateCommentDTO dto) {
+        Comment newComment = postCommandService.createComment(postId, dto);
+        return ApiResponse.onSuccess(PostConverter.toCreateCommentResponseDTO(newComment));
+    }
+
 
 }

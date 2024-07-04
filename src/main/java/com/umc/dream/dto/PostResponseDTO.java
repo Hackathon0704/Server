@@ -15,8 +15,17 @@ public class PostResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class CreateCommunityPostResultDTO {
+    public static class CreateCommunityPostDTO {
         Long postId;
+        LocalDateTime createdAt;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CreateCommentDTO {
+        Long commentId;
         LocalDateTime createdAt;
     }
 

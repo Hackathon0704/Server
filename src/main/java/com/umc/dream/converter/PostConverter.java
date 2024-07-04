@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 public class PostConverter {
 
-    public static PostResponseDTO.CreateCommunityPostResultDTO toCreateCommunityPostResultDTO(Post post) {
-        return PostResponseDTO.CreateCommunityPostResultDTO
+    public static PostResponseDTO.CreateCommunityPostDTO toCreateCommunityPostResultDTO(Post post) {
+        return PostResponseDTO.CreateCommunityPostDTO
                 .builder()
                 .postId(post.getId())
                 .createdAt(post.getCreatedDate())
@@ -81,6 +81,21 @@ public class PostConverter {
                 .content(post.getContent())
                 .createdAt(LocalDate.from(post.getCreatedDate()))
                 .commentDetailDTOList(commentDetailDTOList)
+                .build();
+    }
+
+    public static Comment toComment(PostRequestDTO.CreateCommentDTO dto, User user, Post post) {
+        return Comment.builder()
+                .post(post)
+                .user(user)
+                .reply(dto.getReply())
+                .build();
+    }
+
+    public static PostResponseDTO.CreateCommentDTO toCreateCommentResponseDTO(Comment comment) {
+        return PostResponseDTO.CreateCommentDTO.builder()
+                .commentId(comment.getId())
+                .createdAt(comment.getCreatedDate())
                 .build();
     }
 }
