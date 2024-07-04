@@ -6,6 +6,9 @@ import com.umc.dream.domain.enums.Type;
 import com.umc.dream.dto.ProRequestDTO;
 import com.umc.dream.dto.ProResponseDTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ProPostConverter {
 
     public static ProResponseDTO.CreateResultDTO toProPostResultDTO(Post post) {
@@ -27,6 +30,20 @@ public class ProPostConverter {
                 .writer(writer)
                 .pro(pro)
                 .build();
+    }
+
+    public static ProResponseDTO.ProPostListDTO toProPostListDTO(List<Post> posts) {
+        List<ProResponseDTO.CreateResultDTO> postDTOs = posts.stream()
+                .map(post -> ProResponseDTO.CreateResultDTO.builder()
+                        .name(post.getWriter().getName())
+                        .postId(post.getId())
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .proName(post.getPro().getName())
+                        .createdAt(post.getCreatedDate())
+                        .build())
+                .collect(Collectors.toList());
+        return new ProResponseDTO.ProPostListDTO(postDTOs);
     }
 
 }

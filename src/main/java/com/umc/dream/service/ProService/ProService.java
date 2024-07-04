@@ -5,11 +5,14 @@ import com.umc.dream.apiPayload.exception.GeneralException;
 import com.umc.dream.converter.ProPostConverter;
 import com.umc.dream.domain.Post;
 import com.umc.dream.domain.User;
+import com.umc.dream.domain.enums.Type;
 import com.umc.dream.dto.ProRequestDTO;
 import com.umc.dream.repository.PostRepository;
 import com.umc.dream.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +30,10 @@ public class ProService implements ProServiceImpl{
 
         Post post = ProPostConverter.toProPost(request, writer, pro);
         return postRepository.save(post);
+    }
+
+    @Override
+    public List<Post> getAllProPostList(Long userId) {
+        return postRepository.findAllByWriterIdAndType(userId, Type.PRO);
     }
 }
