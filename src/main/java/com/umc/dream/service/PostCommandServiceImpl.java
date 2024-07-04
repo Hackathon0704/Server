@@ -11,6 +11,7 @@ import com.umc.dream.dto.PostRequestDTO;
 import com.umc.dream.repository.CommentRepository;
 import com.umc.dream.repository.DreamRepository;
 import com.umc.dream.repository.PostRepository;
+import com.umc.dream.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
