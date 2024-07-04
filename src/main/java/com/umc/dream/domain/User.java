@@ -33,6 +33,9 @@ public class User extends BaseEntity {
     @Nullable
     private String price;
 
+    @Nullable
+    private String job;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
