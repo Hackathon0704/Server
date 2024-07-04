@@ -1,5 +1,6 @@
 package com.umc.dream.domain;
 
+import com.umc.dream.domain.common.BaseEntity;
 import com.umc.dream.domain.enums.Type;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -15,7 +16,7 @@ import static jakarta.persistence.FetchType.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
