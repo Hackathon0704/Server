@@ -9,6 +9,8 @@ import com.umc.dream.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -34,6 +36,17 @@ public class UserServiceImpl implements UserService {
         }
         else {
             throw new GeneralException(ErrorStatus._BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public boolean CheckAccount(UserRequestDTO.CheckAccountRequestDto request) {
+        Optional<User> user = userRepository.findByAccount(request.getAccount());
+
+        if (user.isPresent()) {    // 아이디 중복
+            return true;
+        } else {  // 아이디 중복x
+            return false;
         }
     }
 

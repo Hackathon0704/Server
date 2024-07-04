@@ -25,4 +25,10 @@ public class UserRequestDTO {
         @NotNull
         String password;
     }
+
+    @Getter
+    public static class CheckAccountRequestDto {
+        @NotNull
+        String account;
+    }
 }

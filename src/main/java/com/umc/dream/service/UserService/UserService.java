@@ -7,4 +7,6 @@ public interface UserService {
     User join(UserRequestDTO.JoinDto request);
 
     User login(UserRequestDTO.LoginDto request);
+
+    boolean CheckAccount(UserRequestDTO.CheckAccountRequestDto request);
 }

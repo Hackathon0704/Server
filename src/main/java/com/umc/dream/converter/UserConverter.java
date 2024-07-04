@@ -21,6 +21,10 @@ public class UserConverter {
                 .build();
     }
 
+    public static UserResponseDTO.CheckAccountResultDTO toCheckAccountResultDTO(boolean isDuplicated) {
+        return new UserResponseDTO.CheckAccountResultDTO(isDuplicated);
+    }
+
     public static User toUser(UserRequestDTO.JoinDto joinDto) {
         return User.builder()
                 .name(joinDto.getName())
